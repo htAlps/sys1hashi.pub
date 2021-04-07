@@ -1,0 +1,26 @@
+# λ nomad.service  ▻20‹10‹12τ15›32›16› 
+[Unit]
+Description=Nomad
+Documentation=https://nomadproject.io/docs/
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=notify
+User=consul
+Group=hashi
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStart=/usr/local/bin/nomad agent -config /etc/hashi.d/native/nomad/nomad.hcl
+KillMode=process
+KillSignal=SIGINT
+LimitNOFILE=infinity
+LimitNPROC=infinity
+Restart=on-failure
+RestartSec=5
+StartLimitBurst=3
+StartLimitIntervalSec=10
+TasksMax=infinity
+
+[Install]
+WantedBy=multi-user.target
+

@@ -1,0 +1,23 @@
+# λ consul.service -   ▻20‹08‹28τ10›06›12›
+[Unit]
+Description="Consul - Ref Service Architecture"
+Documentation=https://www.consul.io/
+Requires=network-online.target
+After=network-online.target
+
+[Service]
+Type=notify
+User=consul
+Group=hashi
+PermissionsStartOnly=true
+ExecStart=/bin/consul agent -config-dir=/etc/hashi.d/consul
+ExecReload=/bin/consul reload
+ExecStop=/bin/consul leave
+KillMode=process
+Restart=on-failure
+RestartSec=42s
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target
+

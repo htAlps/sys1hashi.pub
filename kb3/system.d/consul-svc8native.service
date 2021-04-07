@@ -1,0 +1,21 @@
+# λ consul-svc8native.service  ▻21➢04➣03τ19➛14➝15›  
+[Unit]
+Description="Consul Native Service #8"
+Documentation=https://github.com/htAlps/dmcs/
+Requires=network-online.target
+After=consul.service 
+
+[Service]
+Type=notify
+User=consul
+Group=hashi
+ExecStart=/usr/local/sys/bin/svc8native
+ExecReload=/usr/local/sys/bin/svc8native
+KillMode=process
+Restart=on-failure
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target
+
+

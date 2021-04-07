@@ -1,0 +1,22 @@
+# λ vault.service -   ▻20‹08‹28τ10›06›12›
+[Unit]
+Description="vault - Ref Service Architecture"
+Documentation=https://www.vault.io/
+Requires=network-online.target
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=notify
+User=vault
+Group=hashi
+ExecStart=/bin/vault agent -dev -config-dir=/etc/hashi.d/vault
+ExecReload=/bin/vault reload
+ExecStop=/usr/local/bin/vault leave
+KillMode=process
+Restart=on-failure
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target
+
